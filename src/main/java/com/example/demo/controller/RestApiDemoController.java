@@ -38,13 +38,9 @@ public class RestApiDemoController {
         System.out.println("========XXXX"+oc);
 
         return oc;*/
-        repository.findById(name);
+        return repository.findById(name);
 
     }
-public static void main(String args[]){
-    RestApiDemoController controller = new RestApiDemoController();
-    Optional<Coffee> oc = controller.getCoffee("mocha");
-    System.out.println(oc.orElse(new Coffee("")).getName());
-}
+
 
 }
