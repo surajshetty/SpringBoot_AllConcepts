@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.beans.Coffee;
+import com.example.demo.repository.DemoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,22 +10,25 @@ import java.util.Optional;
 
 @RestController
 public class RestApiDemoController {
-    private List<Coffee> coffees = new ArrayList<>();
-    public RestApiDemoController (){
+    //private List<Coffee> coffees = new ArrayList<>();
+    private final DemoRepository repository;
+    public RestApiDemoController (DemoRepository repository){
         System.out.println("comtroller........................");
-        coffees.addAll(List.of(new Coffee("mocha"),new Coffee("capachino")));
+        this.repository = repository;
+        this.repository.saveAll(List.of(new Coffee("mocha"),new Coffee("capachino")));
+      //  coffees.addAll();
     }
 
     @RequestMapping(value="/coffees", method= RequestMethod.GET )
     // marshalling and unmarshalling will be done under the hood by jackson
     Iterable<Coffee> getCoffees(){
-        return coffees;
+        return this.repository.findAll();
     }
 
     @GetMapping("/coffee/{name}")
     Optional<Coffee> getCoffee(@PathVariable  String name){
         System.out.println("name:"+name);
-        Optional<Coffee> oc = coffees.stream().filter(e->{
+       /* Optional<Coffee> oc = ((List<Coffee>)this.getCoffees()).stream().filter(e->{
             System.out.println("========"+e.getName()+"========"+name+"======");
             return( e.getName().equalsIgnoreCase(name));
             }
@@ -33,7 +37,8 @@ public class RestApiDemoController {
        // oc
         System.out.println("========XXXX"+oc);
 
-        return oc;
+        return oc;*/
+        repository.findById(name);
 
     }
 public static void main(String args[]){
