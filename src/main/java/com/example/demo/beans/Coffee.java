@@ -6,16 +6,17 @@ import java.util.UUID;
 @Entity
 public class Coffee {
     @Id
-    private final String id;
+    private  String id;
     private String name;
+    public Coffee() {
+        this.id = UUID.randomUUID().toString();
 
-    public Coffee(String id,String name) {
-        this.id = id;
+    }
+    public Coffee(String name) {
+        this.id = UUID.randomUUID().toString();
         this.name = name;
     }
-    public Coffee(String name){
-        this(UUID.randomUUID().toString(),name);
-    }
+
 
     public String getId() {
         return id;

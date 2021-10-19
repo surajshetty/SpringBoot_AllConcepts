@@ -15,7 +15,7 @@ public class RestApiDemoController {
     public RestApiDemoController (DemoRepository repository){
         System.out.println("comtroller........................");
         this.repository = repository;
-        this.repository.saveAll(List.of(new Coffee("mocha"),new Coffee("capachino")));
+       // this.repository.saveAll(List.of(new Coffee("mocha"),new Coffee("capachino")));
       //  coffees.addAll();
     }
 
